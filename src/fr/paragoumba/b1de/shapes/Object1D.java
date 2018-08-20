@@ -8,6 +8,8 @@ public interface Object1D {
 
     void draw(Graphics g, int y);
 
+    void move();
+
     Color getColor();
 
 }

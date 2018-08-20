@@ -4,24 +4,25 @@ import java.awt.*;
 
 public class Line implements Object1D {
 
-    public Line(int x, int length){
+    public Line(Point point1, Point point2){
 
-        this.x = x;
-        this.length = length;
+        this.point1 = point1;
+        this.point2 = point2;
 
     }
 
-    public Line(int x, int length, Color color){
+    public Line(Point point1, Point point2, Color color){
 
-        this.x = x;
-        this.length = length;
+        this.point1 = point1;
+        this.point2 = point2;
         this.color = color;
 
     }
 
-    private int x;
-    private int length;
-    private Color color;
+    public Point point1;
+    public Point point2;
+    public double velocity;
+    public Color color = Color.BLACK;
 
     @Override
     public boolean hit(Object1D object1D) {
@@ -30,15 +31,15 @@ public class Line implements Object1D {
 
             Point point = (Point) object1D;
 
-            return length > 0 ? point.getX() >= x && point.getX() <= x + length : point.getX() <= x && point.getX() >= x + length;
+            return point2.x > 0 ? point.x >= point1.x && point.x <= point1.x + getLength() : point.x <= point1.x && point.x >= point1.x + getLength();
             
         } if (object1D instanceof Line){
 
             Line line = (Line) object1D;
             
-            for (int i = x; i <= x + length; ++i){
+            for (int i = point1.x; i <= point1.x + getLength(); ++i){
 
-                if (i == line.x || i == line.x + line.length) return true;
+                if (i == line.point1.x || i == line.point1.x + line.getLength()) return true;
 
             }
 
@@ -54,7 +55,15 @@ public class Line implements Object1D {
     public void draw(Graphics g, int y) {
         
         g.setColor(color);
-        g.drawRect(x, y, length, 0);
+        g.drawRect(point1.x, y, getLength(), 0);
+
+    }
+
+    @Override
+    public void move() {
+
+        point1.move();
+        point2.move();
 
     }
 
@@ -65,15 +74,9 @@ public class Line implements Object1D {
 
     }
 
-    public int getX() {
-
-        return x;
-
-    }
-
     public int getLength() {
 
-        return length;
+        return (int) Math.round(Math.sqrt(Math.pow(point1.x - point2.x, 2)));
 
     }
 }

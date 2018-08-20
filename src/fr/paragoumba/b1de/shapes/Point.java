@@ -21,8 +21,9 @@ public class Point implements Object1D {
 
     }
 
-    private int x;
-    private Color color;
+    public int x;
+    public double velocity;
+    public Color color = Color.BLACK;
 
     @Override
     public boolean hit(Object1D object1D) {
@@ -36,7 +37,14 @@ public class Point implements Object1D {
     public void draw(Graphics g, int y) {
 
         g.setColor(color);
-        g.drawRect(x, y, 1, 1);
+        g.drawRect(x, y, 0, 0);
+
+    }
+
+    @Override
+    public void move() {
+
+        x += velocity;
 
     }
 
@@ -44,12 +52,6 @@ public class Point implements Object1D {
     public Color getColor() {
 
         return color;
-
-    }
-
-    int getX() {
-
-        return x;
 
     }
 }
