@@ -17,7 +17,7 @@ public class Example {
         Line line = new Line(new Point(0), new Point(30), Color.BLUE);
         Line line2 = new Line(new Point(300), new Point(350), Color.GREEN);
         Point point = new Point(31, Color.RED);
-        Color background = Color.WHITE;
+        Color background = Color.BLACK;
         JPanel panel = new JPanel(){
 
             @Override
